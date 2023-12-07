@@ -19,7 +19,7 @@ For downloading them you can refer to the repo of our previous paper <a href="ht
 - for MSLS, download the dataset from the official website, and format it using the instructions at the link above
 - for Robotcar, at the repo link above we provide from GDrive an already pre-processed version of the dataset 
 
-In this work we also use the SF-XL dataset, which in total is about 1 TB, although we only use the `processed` subset as done in CosPlace. More info in [CosPlace](https://github.com/gmberton/CosPlace). 
+In this work we also use the SF-XL dataset, which in total is about 1 TB, although we only use the `processed` subset as done in CosPlace, which is around 400 GB. More info in [CosPlace](https://github.com/gmberton/CosPlace). 
 You can request the download, specifying the processed version of the dataset, using this form  [_here_](https://forms.gle/wpyDzhDyoWLQygAT9).
 
 ## Model zoo
