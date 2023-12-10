@@ -4,7 +4,6 @@ import torch
 import random
 import logging
 import numpy as np
-from glob import glob
 from PIL import Image
 from PIL import ImageFile
 import torchvision.transforms as T
@@ -78,7 +77,6 @@ class CosplaceTrainDataset(torch.utils.data.Dataset):
         # Pick a random image among those in this class.
         image_path = random.choice(self.images_per_class[class_id])
         image_path = os.path.join(self.base_path, image_path)
-        image_path = image_path.replace("/data/gabriele/datasets/sf_xl/processed/train", self.dataset_folder)
         try:
             pil_image = open_image(image_path)
         except Exception as e:
@@ -113,7 +111,6 @@ class CosplaceTrainDataset(torch.utils.data.Dataset):
         with open(all_paths, "r") as file:
             lines = file.readlines()
         images_paths = [l.replace("\n", "") for l in lines if l.startswith("processed/train")]
-        # images_paths = sorted(glob(f"{dataset_folder}/**/*.jpg", recursive=True))
         logging.debug(f"Found {len(images_paths)} images")
         
         logging.debug("For each image, get its UTM east, UTM north and heading from its path")
