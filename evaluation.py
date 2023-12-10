@@ -1,11 +1,9 @@
-from collections import OrderedDict
 import logging
 from datetime import datetime
 import torch
 
-from jist.datasets import (BaseDataset, TrainDataset, collate_fn,
-                                CosplaceTrainDataset, TestDataset)
-from jist import utils
+from jist.datasets import BaseDataset
+from jist import utils, evals
 from jist.models import JistModel
 
 
@@ -38,7 +36,7 @@ def evaluation(args):
     logging.info(f"Backbone output channels are {model.features_dim}, features descriptor dim is {model.fc_output_dim}, "
              f"sequence descriptor dim is {model.aggregation_dim}")
 
-    _, recalls_str = eval.test(args, eval_ds, model)
+    _, recalls_str = evals.test(args, eval_ds, model)
     logging.info(f"Recalls on test set: {recalls_str}")
     logging.info(f"Finished in {str(datetime.now() - start_time)[:-7]}")
 

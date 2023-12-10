@@ -64,9 +64,8 @@ def parse_arguments():
     parser.add_argument("--lambda_im2im", type=float, default=100, help="weight to cosplace loss")
     
     # PATHS
-    parser.add_argument("--seq_dataset_path", type=str, required=True,
-                        help="Path of the seq2seq dataset")
-    parser.add_argument("--dataset_folder", type=str, required=True, # should end in 'sf_xl/processed"
+    parser.add_argument("--seq_dataset_path", type=str, help="Path of the seq2seq dataset")
+    parser.add_argument("--dataset_folder", type=str, # should end in 'sf_xl/processed"
                         help="path of the SF-XL processed folder with train/val/test sets")
     parser.add_argument("--exp_name", type=str, default="default",
                         help="Folder name of the current run (saved in ./runs/)")
@@ -105,17 +104,18 @@ def parse_arguments():
     
     args = parser.parse_args()
 
-    args.train_set_folder = os.path.join(args.dataset_folder, "train")
-    if not os.path.exists(args.train_set_folder):
-        raise FileNotFoundError(f"Folder {args.train_set_folder} does not exist")
-    
-    args.val_set_folder = os.path.join(args.dataset_folder, "val")
-    if not os.path.exists(args.val_set_folder):
-        raise FileNotFoundError(f"Folder {args.val_set_folder} does not exist")
-    
-    args.test_set_folder = os.path.join(args.dataset_folder, "test")
-    if not os.path.exists(args.test_set_folder):
-        raise FileNotFoundError(f"Folder {args.test_set_folder} does not exist")
+    if args.dataset_folder is not None:
+        args.train_set_folder = os.path.join(args.dataset_folder, "train")
+        if not os.path.exists(args.train_set_folder):
+            raise FileNotFoundError(f"Folder {args.train_set_folder} does not exist")
+        
+        args.val_set_folder = os.path.join(args.dataset_folder, "val")
+        if not os.path.exists(args.val_set_folder):
+            raise FileNotFoundError(f"Folder {args.val_set_folder} does not exist")
+        
+        args.test_set_folder = os.path.join(args.dataset_folder, "test")
+        if not os.path.exists(args.test_set_folder):
+            raise FileNotFoundError(f"Folder {args.test_set_folder} does not exist")
             
     if args.queries_per_epoch % args.cached_queries != 0:
         raise ValueError("Please ensure that queries_per_epoch is divisible by cache_refresh_rate, " +

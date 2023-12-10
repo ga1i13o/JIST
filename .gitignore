@@ -13,6 +13,7 @@ cache
 out.txt
 vit_legion.job
 ign*.*
+test
 *.pkl
 testing*.py
 *.npy

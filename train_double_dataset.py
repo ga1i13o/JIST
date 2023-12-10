@@ -185,7 +185,7 @@ for epoch_num in range(start_epoch_num, args.epochs_num):
             else:
                 sequence_mean_loss.update(-1)
 
-            if args.lambda_cosplace != 0:
+            if args.lambda_im2im != 0:
                 #### ITERATION ON COSPLACE
                 images, targets, _ = next(dataloader_iterator)
                 images, targets = images.to(args.device), targets.to(args.device)
@@ -198,7 +198,7 @@ for epoch_num in range(start_epoch_num, args.epochs_num):
                     output = classifiers[current_group_num](descriptors, targets)
                     cosplace_loss = criterion(output, targets)
                 del output, images, descriptors, targets
-                cosplace_loss *= args.lambda_cosplace
+                cosplace_loss *= args.lambda_im2im
                 scaler.scale(cosplace_loss).backward()
                 cosplace_mean_loss.update(cosplace_loss.item())
                 del cosplace_loss
@@ -206,7 +206,7 @@ for epoch_num in range(start_epoch_num, args.epochs_num):
                 cosplace_mean_loss.update(-1)
 
             scaler.step(model_optimizer)
-            if args.lambda_cosplace != 0:
+            if args.lambda_im2im != 0:
                 scaler.step(classifiers_optimizers[current_group_num])
             scaler.update()
             tqdm_bar.set_description(f"seq_loss: {sequence_mean_loss.compute():.4f} - cos_loss: {cosplace_mean_loss.compute():.2f}")
