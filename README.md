@@ -22,10 +22,6 @@ For downloading them you can refer to the repo of our previous paper <a href="ht
 In this work we also use the SF-XL dataset, which in total is about 1 TB, although we only use the `processed` subset as done in CosPlace, which is around 400 GB. More info in [CosPlace](https://github.com/gmberton/CosPlace). 
 You can request the download, specifying the processed version of the dataset, using this form  [_here_](https://forms.gle/wpyDzhDyoWLQygAT9).
 
-## Model zoo
-
-coming soon
-
 ## Run Experiments
 Once the datasets are ready, we can proceed running the experiments with the architecture of choice.
 
@@ -54,6 +50,9 @@ It is possible to evaluate the trained models using:
 python main_scripts/evaluation.py \
 	--resume <path trained model> --seq_dataset_path /path/to/dataset
 ```
+
+### Download trained models
+You can download our JIST model with a ResNet-18 backbone and SeqGem from [this Google Drive link](https://drive.google.com/file/d/1F6eVrR-0LseE-tfbT8Y8WT92_O11lt5o/view?usp=sharing).
 
 ## Acknowledgements
 
